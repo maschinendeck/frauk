@@ -73,16 +73,18 @@ def add_drink():
             "active" : 1}
         db = get_db()
         cur = db.execute('''
-            INSER INTO drinks
+            INSERT INTO drinks
             (name, bottle_size, caffeine, price,
             logo_file_name, created_at, updated_at,
             logo_content_type, logo_file_size,
             logo_updated_at, active)
+            VALUES
             (:name, :bottle_size, :caffeine, :price,
             :logo_file_name, :created_at, :updated_at,
             :logo_content_type, :logo_file_size,
             :logo_updated_at, :active)
             ''', drink)
+        db.commit()
         return 'hello ' + form.name.data
     return render_template('add_drink.html', form=form)
 
