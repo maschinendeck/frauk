@@ -10,6 +10,7 @@ CREATE TABLE audits (
 DROP TABLE IF EXISTS drinks;
 CREATE TABLE drinks (
     id integer primary key autoincrement,
+    name text not null,
     bottle_size real not null,
     caffeine integer not null,
     price real not null,
