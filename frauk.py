@@ -1,7 +1,7 @@
 import sqlite3, os
 from flask import Flask, request, g, render_template, make_response, url_for
 from flask_bootstrap import Bootstrap
-from forms import AddDrink
+from forms import AddDrink, AddUser
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -57,7 +57,7 @@ def close_db(error):
 
 @app.route('/', methods = ['GET'])
 def list_routes():
-""" lists all routes that exist in this app """
+    """lists all routes that exist in this app. leave on route '/' or remove completely (when implementing navigation)"""
     def has_no_empty_params(rule):
         defaults = rule.defaults if rule.defaults is not None else ()
         arguments = rule.arguments if rule.arguments is not None else ()
@@ -101,12 +101,13 @@ def add_drink():
             "price" : form.price.data,
             "logo_file_name" : form.logo_file_name.data,
             "created_at" : 'tbd',
-           "updated_at" : 'tbd',
+            "updated_at" : 'tbd',
             "caffeine" : form.caffeine.data,
             "logo_content_type" : 'tbd',
             "logo_file_size" : 'tbd',
             "logo_updated_at" : 'tbd',
-            "active" : 1}
+            "active" : 1
+        }
         db = get_db()
         cur = db.execute('''
             INSERT INTO drinks
@@ -124,6 +125,33 @@ def add_drink():
         return 'hello ' + form.name.data
     return render_template('add_drink.html', form=form)
 
+@app.route('/add_user', methods=['GET', 'POST'])
+def add_user():
+    form = AddUser()
+    if form.validate_on_submit():
+        user = {
+            "name" : form.name.data,
+            "email" : form.email.data,
+            "created_at": "tbd",
+            "updated_at": "tbd",
+            "balance": 0,
+            "active": 1,
+            "audit": form.audit.data,
+            "redirect": 0
+        }
+        db = get_db()
+        cur = db.cursor()
+        cur.execute('''
+            INSERT INTO users
+            (name, email, created_at, updated_at, 
+            balance, active, audit, redirect)
+            VALUES
+            (:name, :email, :created_at, :updated_at, 
+            :balance, :active, :audit, :redirect)
+            ''', user)
+        db.commit()
+        return 'hello' + form.name.data
+    return render_template('add_user.html', form=form)
 
 if __name__ == '__main__':
     app.run()

@@ -9,3 +9,8 @@ class AddDrink(Form):
     price =  FloatField('Price', validators=[DataRequired()])
     logo_file_name = StringField('Logo', validators=[DataRequired()])
     #active = BooleanField('Active', validators=[DataRequired()])
+
+class AddUser(Form):
+    name = StringField('Name', validators=[DataRequired()])
+    email = StringField('E-Mail', validators=[DataRequired()])
+    audit = BooleanField('Appear in Audits')
