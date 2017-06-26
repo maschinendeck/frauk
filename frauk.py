@@ -1,3 +1,4 @@
+import datetime
 import sqlite3, os
 from flask import Flask, request, g, render_template, make_response, \
     redirect, url_for
@@ -96,7 +97,7 @@ def get_drinks():
     db.commit()
     return render_template('drinks.html', drinks = drinks)
 
-@app.route('/add_drink', methods = ['GET','POST'])
+@app.route('/drinks/new', methods = ['GET','POST'])
 def add_drink():
     form = AddDrink()
     if form.validate_on_submit():
@@ -140,7 +141,7 @@ def get_users():
     db.commit()
     return render_template('users.html', users = users)
 
-@app.route('/add_user', methods=['GET', 'POST'])
+@app.route('/users/new', methods=['GET', 'POST'])
 def add_user():
     form = AddUser()
     if form.validate_on_submit():
@@ -167,6 +168,38 @@ def add_user():
         db.commit()
         return redirect(url_for('get_users'))
     return render_template('add_user.html', form=form)
+
+@app.route('/users/<uid>/edit', methods=['GET', 'POST'])
+def edit_user(uid):
+    db = get_db()
+    cur = db.cursor()
+    rows = cur.execute('''SELECT name, email, audit FROM users WHERE id = ? ''', [uid])
+    user = cur.fetchone()
+    form = AddUser()
+#   form.name.data = user["name"]
+#   form.email.data = user["email"]
+#   form.audit.data = user["audit"]
+
+    if form.validate_on_submit():
+        usr = {
+            "id" : uid,
+            "name" : form.name.data,
+            "email" : form.email.data,
+            "updated_at": "asd",
+            "audit": form.audit.data
+        }
+
+        db = get_db()
+        cur = db.cursor()
+        #res = cur.execute(""" UPDATE users SET (name, email, updated_at, audit) 
+        #    VALUES (:name, :email, :updated_at, :audit)
+        #    WHERE id=:id;""", usr)
+        db.commit() # TODO
+        return str(usr)
+        return redirect(url_for('get_users'))
+    return render_template('edit_user.html', form=form)
+
+
 
 if __name__ == '__main__':
     app.run()
