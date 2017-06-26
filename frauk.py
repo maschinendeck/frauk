@@ -1,5 +1,6 @@
 import sqlite3, os
-from flask import Flask, request, g, render_template, make_response, url_for
+from flask import Flask, request, g, render_template, make_response, \
+    redirect, url_for
 from flask_bootstrap import Bootstrap
 from forms import AddDrink, AddUser
 
@@ -86,8 +87,14 @@ def list_routes():
     </html>
     """
     return render_template_string(tmpl, routes=links)
-    
 
+@app.route('/drinks', methods = ['GET'])
+def get_drinks():
+    db = get_db()
+    cur = db.execute('SELECT * FROM drinks')
+    drinks = cur.fetchall()
+    db.commit()
+    return render_template('drinks.html', drinks = drinks)
 
 @app.route('/add_drink', methods = ['GET','POST'])
 def add_drink():
@@ -122,7 +129,7 @@ def add_drink():
             :logo_updated_at, :active)
             ''', drink)
         db.commit()
-        return 'hello ' + form.name.data
+        return redirect(url_for('get_drinks'))
     return render_template('add_drink.html', form=form)
 
 @app.route('/add_user', methods=['GET', 'POST'])
