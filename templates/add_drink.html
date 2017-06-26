@@ -1,17 +1,21 @@
-<html>
-    <head>
-        <title>Add Drink</title>
-    </head>
-    <body>
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Add a new Drink!{% endblock %}
+{% block content %}
+    <div class="container">
         <form action="" method="post">
-            {{ form.name }} {{ form.name.label }} 
-            {{ form.bottle_size }} {{ form.bottle_size.label }} 
-            {{ form.caffeine }} {{ form.caffeine.label }} 
-            {{ form.price }} {{ form.price.label }} 
-            {{ form.logo_file_name }} {{ form.logo_file_name.label }} 
-            {{ form.csrf_token }} {{ form.csrf_token.label }}
+            {{ form.hidden_tag() }}
+            {{ wtf.form_errors(form, hiddens="only") }}
+
+            {{ wtf.form_field(form.name) }}
+            {{ wtf.form_field(form.bottle_size) }}
+            {{ wtf.form_field(form.caffeine) }}
+            {{ wtf.form_field(form.price) }}
+            {{ wtf.form_field(form.logo_file_name) }}
+            {{ wtf.form_field(form.bottle_size) }}
+            {{ form.csrf_token }}
             <input type="submit" value="Add">
         </form>
-    </body>
-</html>
+    </div>
+{% endblock %}
 

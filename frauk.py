@@ -1,8 +1,10 @@
 import sqlite3, os
 from flask import Flask, request, g, render_template, make_response
+from flask_bootstrap import Bootstrap
 from forms import AddDrink
 
 app = Flask(__name__)
+Bootstrap(app)
 app.config.from_object(__name__)
 
 app.config.update({
