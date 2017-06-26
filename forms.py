@@ -1,6 +1,6 @@
 from flask_wtf import Form
 from wtforms import StringField, FloatField, IntegerField, BooleanField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Email
 
 class AddDrink(Form):
     name = StringField('Name', validators=[DataRequired()])
@@ -12,5 +12,5 @@ class AddDrink(Form):
 
 class AddUser(Form):
     name = StringField('Name', validators=[DataRequired()])
-    email = StringField('E-Mail', validators=[DataRequired()])
+    email = StringField('E-Mail', validators=[DataRequired(), Email()])
     audit = BooleanField('Appear in Audits')

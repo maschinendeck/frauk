@@ -132,6 +132,14 @@ def add_drink():
         return redirect(url_for('get_drinks'))
     return render_template('add_drink.html', form=form)
 
+@app.route('/users', methods = ['GET'])
+def get_users():
+    db = get_db()
+    cur = db.execute('SELECT * FROM users')
+    users = cur.fetchall()
+    db.commit()
+    return render_template('users.html', users = users)
+
 @app.route('/add_user', methods=['GET', 'POST'])
 def add_user():
     form = AddUser()
@@ -157,7 +165,7 @@ def add_user():
             :balance, :active, :audit, :redirect)
             ''', user)
         db.commit()
-        return 'hello' + form.name.data
+        return redirect(url_for('get_users'))
     return render_template('add_user.html', form=form)
 
 if __name__ == '__main__':
