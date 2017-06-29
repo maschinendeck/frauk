@@ -1,5 +1,6 @@
 # Import SQLAlchemy
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
 # Define the WSGI application object
 app = Flask(__name__)

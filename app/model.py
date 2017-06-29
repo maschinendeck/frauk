@@ -1,4 +1,4 @@
-from frauk import db
+from app import db
 class Audit(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     createt_at = db.Column(db.DateTime, default=datetime.datetime.now())
