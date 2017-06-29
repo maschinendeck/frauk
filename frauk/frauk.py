@@ -1,6 +1,5 @@
 import datetime
-import sqlite3, os
-from flask import Flask, request, g, render_template, make_response, \
+import sqlite3, os from flask import Flask, request, g, render_template, make_response, \
     redirect, url_for
 from flask_bootstrap import Bootstrap
 from forms import AddDrink, AddUser
