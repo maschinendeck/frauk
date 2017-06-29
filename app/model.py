@@ -1,10 +1,13 @@
+import datetime
 from app import db
+
+
 class Audit(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     createt_at = db.Column(db.DateTime, default=datetime.datetime.now())
     difference = db.Column(db.Numeric, default=0)
-    drink = ? foreign key stuff
-    user = ?
+    drink = db.Column(db.ForeignKey('drink.id'), nullable=False)
+    user = db.Column(db.ForeignKey('user.id'), nullable=False)
 
 class Drink(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,7 +18,7 @@ class Drink(db.Model):
     logo = db.Column(db.LargeBinary)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
-    logo_updated_at = db.Column(DateTime)
+    logo_updated_at = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
 
 class User(db.Model):
