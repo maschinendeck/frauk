@@ -1,10 +1,11 @@
 from flask import Blueprint, request, render_template, \
                   flash, g, session, redirect, url_for
 
-from app.model import User
-from app.forms import AddUser
+from app.model import User, Drink
+from app.forms import AddUser, AddDrink
 from app import db
 
+#Users
 users = Blueprint('users', __name__, url_prefix='/users')
 
 @users.route('/', methods = ['GET'])
@@ -32,4 +33,35 @@ def edit_user(uid):
         db.session.commit()
         return redirect(url_for('users.get_users'))
     return render_template('edit_user.html', form=form)
-    
+
+#Drinks
+drinks = Blueprint('drinks', __name__, url_prefix='/drinks')
+
+@drinks.route('/', methods = ['GET'])
+def get_drinks():
+    drinks = Drink.query.all()
+    return render_template('drinks.html', drinks = drinks)
+
+@drinks.route('/add', methods = ['GET','POST'])
+def add_drink():
+    form = AddDrink()
+    if form.validate_on_submit():
+        drink = Drink(form.name.data, form.bottle_size_l.data,
+            form.caffeine_mg.data, form.price.data)
+        db.session.add(drink)
+        db.session.commit()
+        return redirect(url_for('drinks.get_drinks'))
+    return render_template('add_drink.html', form=form)
+
+@drinks.route('/<did>/edit', methods = ['GET','POST'])
+def edit_drink(did):
+    drink = Drink.query.filter_by(id=did).first()
+    form = AddDrink(obj=drink)
+    if form.validate_on_submit():
+        drink.name = form.name.data
+        drink.bottle_size_l = form.bottle_size_l.data
+        drink.caffeine_mg = form.caffeine_mg.data
+        drink.price = form.price.data
+        db.session.commit()
+        return redirect(url_for('drinks.get_drinks'))
+    return render_template('edit_drink.html', form=form)

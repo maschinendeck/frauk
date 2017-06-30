@@ -4,10 +4,10 @@ from wtforms.validators import DataRequired, Email
 
 class AddDrink(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    bottle_size =  FloatField('Bottle Size', validators=[DataRequired()])
-    caffeine = IntegerField('Caffeine', validators=[DataRequired()])
+    bottle_size_l =  FloatField('Bottle Size', validators=[DataRequired()])
+    caffeine_mg = IntegerField('Caffeine', validators=[DataRequired()])
     price =  FloatField('Price', validators=[DataRequired()])
-    logo_file_name = StringField('Logo', validators=[DataRequired()])
+    #logo_file_name = StringField('Logo', validators=[DataRequired()])
     #active = BooleanField('Active', validators=[DataRequired()])
 
 class AddUser(FlaskForm):

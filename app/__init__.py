@@ -14,5 +14,6 @@ app.config.from_object('config')
 # by modules and controllers
 db = SQLAlchemy(app)
 
-from app.controllers import users
+from app.controllers import users, drinks
 app.register_blueprint(users)
+app.register_blueprint(drinks)

@@ -8,19 +8,18 @@
                 <th> Bottle Size </th>
                 <th> Caffeine </th>
                 <th> Price </th>
-                <th> Logo </th>
             </tr>
             {% for drink in drinks %}
             <tr>
                 <td> {{ drink.name }} </td>
-                <td> {{ drink.bottle_size }} </td>
-                <td> {{ drink.caffeine }} </td>
+                <td> {{ drink.bottle_size_l }} </td>
+                <td> {{ drink.caffeine_mg }} </td>
                 <td> {{ drink.price }} </td>
-                <td> {{ drink.logo_file_name }} </td>
+                <td> <a href="{{ url_for("drinks.edit_drink", did=drink.id) }}">edit</a>
             </tr>
             {% endfor %}
         </table>
-        <a href="/add_drink">Add Drink</a>
+        <a href="{{ url_for("drinks.add_drink") }}">Add Drink</a>
     </div>
 {% endblock %}
 
