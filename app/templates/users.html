@@ -10,13 +10,13 @@
             </tr>
             {% for user in users %}
             <tr>
-                <td> {{ user.name }} </td>
+                <td> {{ user.username }} </td>
                 <td> {{ user.email }} </td>
-                <td> <a href="{{ url_for("edit_user", uid=user.id) }}">edit</a>
+                <td> <a href="{{ url_for("users.edit_user", uid=user.id) }}">edit</a>
             </tr>
             {% endfor %}
         </table>
-      {#<!--  <a href="{{ url_for("add_user") }}">Add User</a> -->#}
+        <a href="{{ url_for("users.add_user") }}">Add User</a>
     </div>
 {% endblock %}
 

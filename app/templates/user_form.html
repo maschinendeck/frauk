@@ -9,7 +9,7 @@
             {{ form.hidden_tag() }}
             {{ wtf.form_errors(form, hiddens="only") }}
 
-            {{ wtf.form_field(form.name) }}
+            {{ wtf.form_field(form.username) }}
             {{ wtf.form_field(form.email) }}
             {{ form.csrf_token }}
             <input type="submit" value="{{submit_value}}">

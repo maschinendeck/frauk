@@ -11,6 +11,6 @@ class AddDrink(FlaskForm):
     #active = BooleanField('Active', validators=[DataRequired()])
 
 class AddUser(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
+    username = StringField('Name', validators=[DataRequired()])
     email = StringField('E-Mail', validators=[DataRequired(), Email()])
     audit = BooleanField('Appear in Audits')

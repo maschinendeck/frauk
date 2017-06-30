@@ -23,10 +23,14 @@ class Drink(db.Model):
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(250))
+    username = db.Column(db.String(250))
     email = db.Column(db.String(250))
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
     balance = db.Column(db.Numeric, default=0)
     active = db.Column(db.Boolean, default=True)
     anonymous_audits = db.Column(db.Boolean, default=True)
+
+    def __init__(self, username, email):
+        self.username = username
+        self.email = email
