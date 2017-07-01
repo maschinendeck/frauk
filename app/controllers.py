@@ -21,7 +21,8 @@ def add_user():
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('users.get_users'))
-    return render_template('add_user.html', form=form)
+    return render_template('form.html', form=form, 
+        title='Add User', submit_value='Add')
 
 @users.route('/<uid>/edit', methods = ['GET','POST'])
 def edit_user(uid):
@@ -32,7 +33,9 @@ def edit_user(uid):
         user.email = form.email.data
         db.session.commit()
         return redirect(url_for('users.get_users'))
-    return render_template('edit_user.html', form=form)
+    return render_template('form.html', form=form,
+        title='Edit User: {}'.format(user.username),
+        submit_value='Edit')
 
 #Drinks
 drinks = Blueprint('drinks', __name__, url_prefix='/drinks')
@@ -51,7 +54,8 @@ def add_drink():
         db.session.add(drink)
         db.session.commit()
         return redirect(url_for('drinks.get_drinks'))
-    return render_template('add_drink.html', form=form)
+    return render_template('form.html', form=form, 
+        title='Add Drink', submit_value='Add')
 
 @drinks.route('/<did>/edit', methods = ['GET','POST'])
 def edit_drink(did):
@@ -64,4 +68,6 @@ def edit_drink(did):
         drink.price = form.price.data
         db.session.commit()
         return redirect(url_for('drinks.get_drinks'))
-    return render_template('edit_drink.html', form=form)
+    return render_template('form.html', form=form,
+        title='Edit Drink: {}'.format(drink.name),
+        submit_value='Edit')
