@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, \
                   flash, g, session, redirect, url_for
 
-from app.model import User, Drink
+from app.model import User, Drink, Audit
 from app.forms import AddUser, AddDrink
 from app import app, db
 
@@ -31,6 +31,7 @@ def edit_user(uid):
     if form.validate_on_submit():
         user.username = form.username.data
         user.email = form.email.data
+        user.audit = form.audit.data
         db.session.commit()
         return redirect(url_for('users.get_users'))
     return render_template('form.html', form=form,
@@ -46,12 +47,23 @@ def select_user():
 
 @buy.route('/<uid>')
 def select_drink(uid):
+    user = User.query.get(uid)
     drinks = Drink.query.all()
-    return render_template('drink_selection.html', uid=uid, drinks=drinks)
+    return render_template('drink_selection.html', user=user, drinks=drinks)
 
-@buy.route('')
+@buy.route('/<uid>/<did>')
 def make_purchase(uid, did):
-    flash('Done. you have bought stuff')
+    user = User.query.get(uid)
+    drink = Drink.query.get(did)
+    if user and drink:
+        user.balance = user.balance - drink.price
+        if user.audit:
+            audit = Audit(difference=drink.price, drink=drink.id, user=0)
+        else:
+            audit = Audit(difference=drink.price, drink=drink.id, user=user.id)
+        db.session.add(audit)
+        db.session.commit()
+	flash('Thank you, {}. You have bought {}.'.format(user.username, drink.name), 'success')
     return redirect(url_for('buy.select_user'))
 
 #Drinks
