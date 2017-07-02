@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Who wants to buy a drink?{% endblock %}
+{% block content %}
+    
+    <div class="container">
+        <h1>Select Drink for purchase:</h1>
+        
+        <ul>
+        {% for drink in drinks %}
+
+            <li><a href="{{ url_for('buy.make_purchase', uid=uid, did=drink.id) }}">{{ drink.name }}</a></li>
+
+        {% endfor %}
+        </ul>
+
+    </div>
+
+
+{% endblock %}

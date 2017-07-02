@@ -3,7 +3,7 @@ from flask import Blueprint, request, render_template, \
 
 from app.model import User, Drink
 from app.forms import AddUser, AddDrink
-from app import db
+from app import app, db
 
 #Users
 users = Blueprint('users', __name__, url_prefix='/users')
@@ -36,6 +36,23 @@ def edit_user(uid):
     return render_template('form.html', form=form,
         title='Edit User: {}'.format(user.username),
         submit_value='Edit')
+
+buy = Blueprint('buy', __name__, url_prefix='/buy')
+
+@buy.route('/')
+def select_user():
+    users = User.query.all()
+    return render_template('user_selection.html', users=users)
+
+@buy.route('/<uid>')
+def select_drink(uid):
+    drinks = Drink.query.all()
+    return render_template('drink_selection.html', uid=uid, drinks=drinks)
+
+@buy.route('')
+def make_purchase(uid, did):
+    flash('Done. you have bought stuff')
+    return redirect(url_for('buy.select_user'))
 
 #Drinks
 drinks = Blueprint('drinks', __name__, url_prefix='/drinks')
