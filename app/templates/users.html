@@ -6,11 +6,13 @@
             <tr>
                 <th> Name </th>
                 <th> Email </th>
+                <th> Balance </th>
             </tr>
             {% for user in users %}
             <tr>
                 <td> {{ user.username }} </td>
                 <td> {{ user.email }} </td>
+                <td> {{ '{0:0.2f}'.format(user.balance) }} </td>
                 <td> <a href="{{ url_for("users.edit_user", uid=user.id) }}">edit</a>
             </tr>
             {% endfor %}

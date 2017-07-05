@@ -14,7 +14,7 @@
                 <td> {{ drink.name }} </td>
                 <td> {{ drink.bottle_size_l }} </td>
                 <td> {{ drink.caffeine_mg }} </td>
-                <td> {{ drink.price }} </td>
+                <td> {{ '{0:0.2f}'.format(drink.price) }} </td>
                 <td> <a href="{{ url_for("drinks.edit_drink", did=drink.id) }}">edit</a>
             </tr>
             {% endfor %}

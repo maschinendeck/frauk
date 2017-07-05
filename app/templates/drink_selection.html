@@ -8,7 +8,9 @@
         <ul>
         {% for drink in drinks %}
 
-            <li><a href="{{ url_for('buy.make_purchase', uid=user.id, did=drink.id) }}">{{ drink.name }}</a></li>
+            <li><a href="{{ url_for('buy.make_purchase', uid=user.id, did=drink.id) }}">
+                {{ drink.name }} ( {{ '{0:0.2f} EUR'.format(drink.price) }} )
+            </a></li>
 
         {% endfor %}
         </ul>
