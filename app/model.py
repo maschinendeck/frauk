@@ -36,7 +36,9 @@ class User(db.Model):
     balance = db.Column(db.Numeric, default=0)
     active = db.Column(db.Boolean, default=True)
     audit = db.Column(db.Boolean, default=True)
+    logo = db.Column(db.String(250))
 
-    def __init__(self, username, email):
+    def __init__(self, username, email, logo):
         self.username = username
         self.email = email
+        self.logo = logo

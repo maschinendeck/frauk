@@ -5,7 +5,7 @@
         <h1>
             {% block title %} {{title}} {%endblock%}
         </h1>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             {{ wtf.quick_form(form) }}
         </form>
     </div>

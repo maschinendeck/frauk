@@ -1,5 +1,8 @@
 from flask import Blueprint, request, render_template, \
-                  flash, g, session, redirect, url_for
+    flash, g, session, redirect, url_for
+from werkzeug.utils import secure_filename
+import os
+    
 
 from app.model import User, Drink, Audit
 from app.forms import AddUser, AddDrink
@@ -50,7 +53,14 @@ def get_users():
 def add_user():
     form = AddUser()
     if form.validate_on_submit():
-        user = User(form.username.data, form.email.data)
+        if form.logo.data:
+            f = form.logo.data
+            filename = secure_filename(f.filename)
+            f.save(os.path.join(
+                app.root_path, 'static', 'uploads', filename))
+        else:
+            filename = ''
+        user = User(form.username.data, form.email.data, filename)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('users.get_users'))

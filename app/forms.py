@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DecimalField, FloatField, IntegerField, \
     BooleanField, SubmitField
+from flask_wtf.file import FileField
 from wtforms.validators import DataRequired, Email
 
 class AddDrink(FlaskForm):
@@ -18,3 +19,4 @@ class AddUser(FlaskForm):
     balance = DecimalField('Balance', validators=[DataRequired()], places=2)
     audit = BooleanField('Appear in Audits')
     submit = SubmitField('Submit')
+    logo = FileField('Logo')
