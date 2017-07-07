@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, DecimalField, FloatField, IntegerField, \
     BooleanField, SubmitField
 from flask_wtf.file import FileField
-from wtforms.validators import DataRequired, Email
+from wtforms.validators import DataRequired, Email, Optional, Regexp
 from app.validators import ImageValidator
 
 class AddDrink(FlaskForm):
@@ -15,9 +15,9 @@ class AddDrink(FlaskForm):
     #active = BooleanField('Active', validators=[DataRequired()])
 
 class AddUser(FlaskForm):
-    username = StringField('Name', validators=[DataRequired()])
+    username = StringField('Name', validators=[DataRequired(), Regexp("^\w+$", message = 'Username is alphanumeric only')])
     email = StringField('E-Mail', validators=[DataRequired(), Email()])
     balance = DecimalField('Balance', validators=[DataRequired()], places=2)
     audit = BooleanField('Appear in Audits')
-    logo = FileField('Logo', validators=[ImageValidator()])
+    logo = FileField('Logo', validators=[ImageValidator(), Optional()])
     submit = SubmitField('Submit')
