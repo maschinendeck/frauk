@@ -1,15 +1,26 @@
 {% extends "layout.html" %}
+
 {% block title %}Who wants to buy a drink?{% endblock %}
+
 {% block content %}
     
     <div class="container">
-        <h1>{{ user.username }}, select a Drink to purchase:</h1>
+        <h1>{{ user.username }}, your balance is {{ '{0:0.2f}'.format(user.balance) }} EUR;. Select a Drink to purchase:</h1>
         
         <ul>
         {% for drink in drinks %}
 
-            <li><a href="{{ url_for('buy.make_purchase', uid=user.id, did=drink.id) }}">
-                {{ drink.name }} ( {{ '{0:0.2f} EUR'.format(drink.price) }} )
+            <li class="drinks-list">
+	    <a href="{{ url_for('buy.make_purchase', uid=user.id, did=drink.id) }}"
+	      class="thumbnail clearfix drink-link">
+		{% if drink.logo %}
+		    <img class="drink-img" src="{{ url_for('static', filename='uploads/' + drink.logo) }}">
+		{% else %}
+		    <img class="drink-img" src="{{ url_for('static', filename='uploads/dummy.png') }}">
+		{% endif %}
+                <span class="drink-title">{{ drink.name }} </span>
+                <br>
+                <span class="drink-price">( {{ '{0:0.2f} EUR'.format(drink.price) }} )
             </a></li>
 
         {% endfor %}

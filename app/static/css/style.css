@@ -1,5 +1,9 @@
 .list-style-none{
+    list-style: none;
+}
+.drinks-list{
     list-style:none;
+    padding-right: 40px;
 }
 .avatar{
     float: left;
@@ -7,4 +11,21 @@
     padding: 10px;
     width: 100px;
     overflow: hidden;
+}
+
+.drink-img{
+    float: left;
+    width: 100px;
+    height: 100px;
+}
+
+.drink-link{
+    margin-bottom: 5px;
+}
+.drink-title{
+    margin-left: 10px;
+    font-size: 20pt;
+}
+.drink-price{
+    margin-left: 10px;
 }
