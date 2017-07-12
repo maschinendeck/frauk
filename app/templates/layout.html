@@ -4,6 +4,8 @@
 {{super()}}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
 {% endblock %}
+
+
 {% block content %}
 
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -18,8 +20,8 @@
           {% endif %}
         {% endwith %}
 
-        {% block content2 %}
+	
+{{ super() }}
 
-        {% endblock %}
 
 {% endblock %}
