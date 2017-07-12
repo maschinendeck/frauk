@@ -16,14 +16,8 @@ def get_users():
 def add_user():
     form = AddUser()
     if form.validate_on_submit():
-        if form.logo.data:
-            f = form.logo.data
-            filename = secure_filename(f.filename)
-            f.save(os.path.join(
-                app.root_path, 'static', 'uploads', filename))
-        else:
-            filename = ''
-        user = User(form.username.data, form.email.data, filename)
+        user = User()
+        user.fromForm(form)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('users.get_users'))
@@ -35,10 +29,7 @@ def edit_user(uid):
     user = User.query.filter_by(id=uid).first()
     form = AddUser(obj=user)
     if form.validate_on_submit():
-        user.username = form.username.data
-        user.email = form.email.data
-        user.balance = form.balance.data
-        user.audit = form.audit.data
+        user.fromForm(form)
         db.session.commit()
         return redirect(url_for('users.get_users'))
     return render_template('form.html', form=form,
