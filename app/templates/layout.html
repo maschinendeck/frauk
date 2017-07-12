@@ -5,6 +5,23 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
 {% endblock %}
 
+{% block navbar %}
+
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">
+		<img alt="frauK." src="{{  url_for('static', filename='images/logo.png')  }}">
+	      </a>
+	    </div>
+	    <a href="{{ url_for('users.add_user') }}" class="btn btn-default navbar-btn">New User</a>
+	    <a href="{{ url_for('users.get_users') }}" class="btn btn-default navbar-btn">List Users</a>
+	    <a href="{{ url_for('drinks.get_drinks') }}" class="btn btn-default navbar-btn">List Drinks</a>
+	    <a href="#{# url_for('audits.get_audits') #}" class="btn btn-default navbar-btn">Audits</a>
+	  </div>
+	</nav>
+
+{% endblock %}
 
 {% block content %}
 
