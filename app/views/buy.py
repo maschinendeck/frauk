@@ -27,7 +27,7 @@ def make_purchase(uid, did):
             audit = Audit(difference=drink.price, drink=drink.id, user=0)
         db.session.add(audit)
         db.session.commit()
-	flash('Thank you, {}. You have bought {} for {}. Your new balance is {}.'.format(\
+	flash(u'Thank you, {}. You have bought {} for {}. Your new balance is {}.'.format(\
         user.username, 
         drink.name, 
         '{0:0.2f} EUR'.format(drink.price), 
