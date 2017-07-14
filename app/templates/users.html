@@ -7,14 +7,26 @@
                 <th> Name </th>
                 <th> Email </th>
                 <th> Balance </th>
+                <th> Audits </th>
             </tr>
             {% for user in users %}
             <tr>
-                <td> {{ user.username }} </td>
+                <td>
+                    <span 
+                        style="color:{{ user.color }};"
+                        class="glyphicon glyphicon-user"
+                        aria-hidden="true">
+                    </span>
+                    {{ user.username }}
+                </td>
                 <td> {{ user.email }} </td>
                 <td> {{ '{0:0.2f}'.format(user.balance) }} </td>
+                {% if user.audit %}
+                    <td> <a href="{{ url_for("audits.get_audits", uid=user.id) }}">audit</a>
+                {% else %}
+                    <td> - </td>
+                {% endif %}
                 <td> <a href="{{ url_for("users.edit_user", uid=user.id) }}">edit</a>
-                <td> <a href="{{ url_for("audits.get_audits", uid=user.id) }}">audit</a>
             </tr>
             {% endfor %}
         </table>
