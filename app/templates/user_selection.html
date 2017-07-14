@@ -4,14 +4,13 @@
 
 {% block content %}
     
+{{ super() }}
+
 <div class="container">
     <h1>Select User for purchase:</h1>
     <ul class="list-group">
     {% for user in users %}
-        <a class="list-group-item"
-        href="{{ url_for('buy.select_drink', uid=user.id) }}"
-        style="background-color:{{ user.color }};color:white;"
-        >
+        <a class="avatar drink-img" href="{{ url_for('buy.select_drink', uid=user.id) }}" style="background-color:{{ user.color }};color:white;" >
            {{ user.username }}
         </a>
     {% endfor %}

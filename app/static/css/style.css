@@ -9,14 +9,15 @@
     float: left;
     margin: 2px;
     padding: 10px;
-    width: 100px;
     overflow: hidden;
+    font-size: 22pt;
+    text-overflow: ellipsis;
 }
 
 .drink-img{
     float: left;
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
 }
 
 .drink-link{
