@@ -1,14 +1,14 @@
 # tests for color generation
 
 import colorsys
-import random
+import hashlib
 
 def from_name(name):
-    random.seed(name)
-    for irrelevant in range(len(name)):
-        random.random()
+    
     gr = 0.618033988749895
-    hue = random.random()
+    hue = hashlib.sha224(name).hexdigest() 
+    hue = '0.'+''.join([c for c in hue if ord(c) in range(ord('0'),ord('9')+1)])
+    hue = float(hue)
     hue += gr
     hue = hue % 1
     a = colorsys.hsv_to_rgb(hue, 0.8, 0.6)
