@@ -19,5 +19,6 @@ class AddUser(FlaskForm):
     email = StringField('E-Mail', validators=[DataRequired(), Email()])
     balance = DecimalField('Balance', validators=[DataRequired()], places=2)
     audit = BooleanField('Appear in Audits')
-    logo = FileField('Logo', validators=[ImageValidator(), Optional()])
+    fg_color = StringField('Color1', validators=[DataRequired()])
+    bg_color = StringField('Color2', validators=[DataRequired()])
     submit = SubmitField('Submit')

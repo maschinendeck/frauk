@@ -1,7 +1,5 @@
 import datetime
-from werkzeug.utils import secure_filename
-from app import db, app
-import os
+from app import db
 
 
 class Audit(db.Model):
@@ -38,17 +36,14 @@ class User(db.Model):
     balance = db.Column(db.Numeric, default=0)
     active = db.Column(db.Boolean, default=True)
     audit = db.Column(db.Boolean, default=True)
-    logo = db.Column(db.String(250))
+    fg_color = db.Column(db.String(6), default='f7f9fb')
+    bg_color = db.Column(db.String(6), default='56bf8b')
 
     def fromForm(self,form):
-        if form.logo.data:
-            f = form.logo.data
-            filename = secure_filename(f.filename)
-            f.save(os.path.join(
-                app.root_path, 'static', 'uploads', filename))
-            self.logo = filename
         self.username = form.username.data
         self.email = form.email.data
         self.balance = form.balance.data
         self.audit = form.audit.data
+        self.fg_color = form.fg_color.data
+        self.bg_color = form.bg_color.data
         self.updated_at = datetime.datetime.now()
