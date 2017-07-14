@@ -10,7 +10,7 @@
     {% for user in users %}
         <a class="list-group-item"
         href="{{ url_for('buy.select_drink', uid=user.id) }}"
-        style="background-color:#{{ user.color }};color:white;"
+        style="background-color:{{ user.color }};color:white;"
         >
            {{ user.username }}
         </a>

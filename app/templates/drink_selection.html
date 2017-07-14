@@ -11,7 +11,7 @@
         {% for drink in drinks %}
             <a class="list-group-item"
             href="{{ url_for('buy.make_purchase', uid=user.id, did=drink.id) }}"
-            style="background-color:#{{ drink.color }};color:white;"
+            style="background-color:{{ drink.color }};color:white;"
             >
                {{ drink.name }} @ {{ '{0:0.2f} EUR'.format(drink.price) }}
             </a>
