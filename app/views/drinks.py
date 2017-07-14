@@ -15,8 +15,8 @@ def get_drinks():
 def add_drink():
     form = AddDrink()
     if form.validate_on_submit():
-        drink = Drink(form.name.data, form.bottle_size_l.data,
-            form.caffeine_mg.data, form.price.data)
+        drink = Drink()
+        drink.fromForm(form)
         db.session.add(drink)
         db.session.commit()
         return redirect(url_for('drinks.get_drinks'))
@@ -28,10 +28,7 @@ def edit_drink(did):
     drink = Drink.query.filter_by(id=did).first()
     form = AddDrink(obj=drink)
     if form.validate_on_submit():
-        drink.name = form.name.data
-        drink.bottle_size_l = form.bottle_size_l.data
-        drink.caffeine_mg = form.caffeine_mg.data
-        drink.price = form.price.data
+        drink.fromForm(form)
         db.session.commit()
         return redirect(url_for('drinks.get_drinks'))
     return render_template('form.html', form=form,

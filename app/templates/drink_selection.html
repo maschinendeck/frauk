@@ -9,20 +9,12 @@
         
         <ul>
         {% for drink in drinks %}
-
-            <li class="drinks-list">
-	    <a href="{{ url_for('buy.make_purchase', uid=user.id, did=drink.id) }}"
-	      class="thumbnail clearfix drink-link">
-		{% if drink.logo %}
-		    <img class="drink-img" src="{{ url_for('static', filename='uploads/' + drink.logo) }}">
-		{% else %}
-		    <img class="drink-img" src="{{ url_for('static', filename='uploads/dummy.png') }}">
-		{% endif %}
-                <span class="drink-title">{{ drink.name }} </span>
-                <br>
-                <span class="drink-price">( {{ '{0:0.2f} EUR'.format(drink.price) }} )
-            </a></li>
-
+            <a class="list-group-item"
+            href="{{ url_for('buy.make_purchase', uid=user.id, did=drink.id) }}"
+            style="background-color:#{{ drink.color }};color:white;"
+            >
+               {{ drink.name }} @ {{ '{0:0.2f} EUR'.format(drink.price) }}
+            </a>
         {% endfor %}
         </ul>
 
