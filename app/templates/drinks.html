@@ -11,7 +11,14 @@
             </tr>
             {% for drink in drinks %}
             <tr>
-                <td> {{ drink.name }} </td>
+                <td>
+                    <span 
+                        style="color:{{ drink.color }};"
+                        class="glyphicon glyphicon-glass"
+                        aria-hidden="true">
+                    </span>
+                    {{ drink.name }}
+                </td>
                 <td> {{ drink.bottle_size_l }} </td>
                 <td> {{ drink.caffeine_mg }} </td>
                 <td> {{ '{0:0.2f}'.format(drink.price) }} </td>
