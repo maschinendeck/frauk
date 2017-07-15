@@ -4,7 +4,8 @@ import colorsys
 import hashlib
 
 def from_name(name):
-    
+    print type(name)
+    name = name.encode('utf-8')
     gr = 0.618033988749895
     hue = hashlib.sha224(name).hexdigest() 
     hue = '0.'+''.join([c for c in hue if ord(c) in range(ord('0'),ord('9')+1)])
