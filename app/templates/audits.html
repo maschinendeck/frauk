@@ -11,7 +11,7 @@
             </tr>
             {% for audit in audits %}
             <tr>
-                <td> {{ audit.created_at }} </td>
+                <td> {{ audit.created_at.strftime("%d.%m.%y - %H:%M") }} </td>
                 <td> {{ '{0:0.2f}'.format(audit.difference) }} </td>
                 <td>
                     <span 
