@@ -30,3 +30,21 @@
 .drink-price{
     margin-left: 10px;
 }
+
+.navbar-frauk{
+    background-color: #223b54;
+    border-radius: 0;
+    
+}
+.navbar-frauk li a{
+    color: white;
+}
+.navbar-frauk li a:hover{
+    background-color: #0b1c2c;
+}
+.frauk-brand {
+    color: white;
+}
+.frauk-brand:hover {
+    color: white;
+}

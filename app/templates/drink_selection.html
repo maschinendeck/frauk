@@ -1,6 +1,15 @@
 {% extends "layout.html" %}
 
-{% block title %}Who wants to buy a drink?{% endblock %}
+{% block title %}Who wants to be a Mateonaire?{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style>
+    .navbar-frauk{
+        background-color: {{ user.color }};
+    }
+</style>
+{% endblock %}
 
 {% block content %}
     
@@ -9,11 +18,11 @@
         
         <ul>
         {% for drink in drinks %}
-            <a class="list-group-item"
-            href="{{ url_for('buy.make_purchase', uid=user.id, did=drink.id) }}"
-            style="background-color:{{ drink.color }};color:white;"
-            >
-               {{ drink.name }} @ {{ '{0:0.2f} EUR'.format(drink.price) }}
+            <a
+                class="avatar drink-img"
+                href="{{ url_for('buy.make_purchase', uid=user.id, did=drink.id) }}"
+                style="background-color:{{ drink.color }};color:white;" >
+                {{ drink.name }} @ {{ '{0:0.2f} EUR'.format(drink.price) }}
             </a>
         {% endfor %}
         </ul>
