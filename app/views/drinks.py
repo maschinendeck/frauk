@@ -32,5 +32,5 @@ def edit_drink(did):
         db.session.commit()
         return redirect(url_for('drinks.get_drinks'))
     return render_template('form.html', form=form,
-        title='Edit Drink: {}'.format(drink.name),
+        title=u'Edit Drink: {}'.format(drink.name),
         submit_value='Edit')
