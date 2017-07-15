@@ -7,8 +7,13 @@ class Audit(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     createt_at = db.Column(db.DateTime, default=datetime.datetime.now())
     difference = db.Column(db.Numeric, default=0)
-    drink = db.Column(db.ForeignKey('drink.id'), nullable=False)
-    user = db.Column(db.ForeignKey('user.id'), nullable=False)
+    drink_id = db.Column(db.ForeignKey('drink.id'), nullable=False)
+    user_id = db.Column(db.ForeignKey('user.id'), nullable=False)
+
+    drink = db.relationship("Drink",foreign_keys=[drink_id])
+    user = db.relationship("User",foreign_keys=[user_id])
+
+    
 
 class Drink(db.Model):
     id = db.Column(db.Integer, primary_key=True)

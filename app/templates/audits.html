@@ -13,8 +13,26 @@
             <tr>
                 <td> {{ audit.created_at }} </td>
                 <td> {{ '{0:0.2f}'.format(audit.difference) }} </td>
-                <td> {{ audit.drink }} </td>
-                <td> {{ audit.user }} </td>
+                <td>
+                    <span 
+                        style="color:{{ audit.drink.color }};"
+                        class="glyphicon glyphicon-glass"
+                        aria-hidden="true">
+                    </span>
+                    {{ audit.drink.name }}
+                </td>
+                <td>
+                    <span 
+                        style="color:{{ audit.user.color }};"
+                        class="glyphicon glyphicon-user"
+                        aria-hidden="true">
+                    </span>
+                    {% if audit.user.username %}
+                    {{ audit.user.username }}
+                    {% else %}
+                    Anonymous
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </table>
