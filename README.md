@@ -1,11 +1,14 @@
 ## frauk
 ### matekasse & more
 
+[Mete](https://github.com/chaosdorf/mete) Clone based on Python and Flask.
+
+
 #### Roadmap
-* zunächst als [Mete](https://github.com/chaosdorf/mete) Clone mit Python und Flask
+* zunächst als [Mete](https://github.com/chaosdorf/mete) Clone mit Python und Flask [95%]
+* Admin Panel zum Editieren von Usern und Preisen.
 * Barcode Scanner zum Scannen der Items
 * User Auth über NFC Karten
-* User Rollen (trusted User sollen Preise anpassen können etc)
 * Getränkebestandsanzeige, Statistiken
 * Gamification (Archivements oder so?)
 
