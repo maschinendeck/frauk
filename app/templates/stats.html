@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}Stats{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3> Top Drinks </h3>
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th> # </th>
+                        <th> Drink </th>
+                    </tr>
+                    {% for drink in drinks %}
+                    <tr>
+                        <td> {{ drink[0] }} </td>
+                        <td> {{ drink[1] }} </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                <h3> Top Users </h3>
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th> # </th>
+                        <th> User </th>
+                    </tr>
+                    {% for user in users %}
+                    <tr>
+                        <td> {{ user[0] }} </td>
+                        <td> {{ user[1] }} </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+    </div>
+{% endblock %}
+
+
+
