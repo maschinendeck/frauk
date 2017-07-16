@@ -65,8 +65,8 @@ for row in rows:
     drink = Drink()
     drink.id = row[0]
     drink.name = row[1]
-    drink.bottle_size = row[2]
-    drink.caffeine = row[3]
+    drink.bottle_size_l = row[2]
+    drink.caffeine_mg = row[3]
     drink.price = row[4]
     drink.color = colors.from_name(row[1])
     drink.created_at = datetime.datetime.strptime(row[6], "%Y-%m-%d %H:%M:%S.%f")
