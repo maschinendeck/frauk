@@ -24,7 +24,7 @@ def make_purchase(uid, did):
         userid = 0
         if user.audit:
             userid = user.id
-        audit = Audit(drink.price, drink.id, userid)
+        audit = Audit(-1 * drink.price, drink.id, userid)
         db.session.add(audit)
         db.session.commit()
 	flash(u'Thank you, {}. You have bought {} for {}. Your new balance is {}.'.format(\
