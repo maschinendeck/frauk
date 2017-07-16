@@ -2,6 +2,11 @@
 {% block title %}Drinks{% endblock %}
 {% block content %}
     <div class="container">
+        <p>
+            <a class="btn btn-default" href="{{ url_for("drinks.add_drink") }}">
+                <i class="glyphicon glyphicon-plus"></i> Add Drink
+            </a>
+        </p>
         <table class="table table-striped table-bordered">
             <tr>
                 <th> Name </th>
@@ -22,11 +27,14 @@
                 <td> {{ drink.bottle_size_l }} </td>
                 <td> {{ drink.caffeine_mg }} </td>
                 <td> {{ '{0:0.2f}'.format(drink.price) }} </td>
-                <td> <a href="{{ url_for("drinks.edit_drink", did=drink.id) }}">edit</a>
+                <td>
+                    <a class="btn btn-default btn-sm" 
+                        href="{{ url_for("drinks.edit_drink", did=drink.id) }}">
+                        <i class="glyphicon glyphicon-pencil"></i> Edit
+                    </a>
             </tr>
             {% endfor %}
         </table>
-        <a href="{{ url_for("drinks.add_drink") }}">Add Drink</a>
     </div>
 {% endblock %}
 
