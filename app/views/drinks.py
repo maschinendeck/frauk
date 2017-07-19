@@ -2,13 +2,14 @@ from flask import Blueprint, render_template, redirect, url_for
 from ..model import Drink
 from ..forms import AddDrink
 from .. import db
+import sqlalchemy
 
 #Drinks
 drinks = Blueprint('drinks', __name__, url_prefix='/drinks')
 
 @drinks.route('/', methods = ['GET'])
 def get_drinks():
-    drinks = Drink.query.all()
+    drinks = Drink.query.order_by(sqlalchemy.func.lower(Drink.name)).all()
     return render_template('drinks.html', drinks = drinks)
 
 @drinks.route('/add', methods = ['GET','POST'])

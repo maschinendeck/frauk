@@ -3,13 +3,14 @@ from werkzeug.utils import secure_filename
 from ..model import User
 from ..forms import AddUser, EditUser
 from .. import app, db
+import sqlalchemy
 
 #Users
 users = Blueprint('users', __name__, url_prefix='/users')
 
 @users.route('/', methods = ['GET'])
 def get_users():
-    users = User.query.all()
+    users = User.query.order_by(sqlalchemy.func.lower(User.username)).all()
     return render_template('users.html', users = users)
 
 @users.route('/add', methods = ['GET','POST'])
