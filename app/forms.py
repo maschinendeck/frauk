@@ -23,13 +23,11 @@ class EditUser(FlaskForm):
     audit = BooleanField('Appear in Audits')
     submit = SubmitField('Submit')
 
-class AddUser(FlaskForm):
+class AddUser(EditUser):
     username = StringField('Name', validators=[
         DataRequired(),
         Regexp("^\w+$", message = 'Username is alphanumeric only'),
         UniqueValidator(User, User.username)
     ])
-    email = StringField('E-Mail', validators=[DataRequired(), Email()])
-    balance = DecimalField('Balance', validators=[DataRequired()], places=2)
-    audit = BooleanField('Appear in Audits')
-    submit = SubmitField('Submit')
+    # put username at the right place in our form
+    username.creation_counter = EditUser.username.creation_counter
