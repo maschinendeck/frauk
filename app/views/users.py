@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for
 from werkzeug.utils import secure_filename
 from ..model import User
-from ..forms import AddUser
+from ..forms import AddUser, EditUser
 from .. import app, db
 
 #Users
@@ -27,7 +27,7 @@ def add_user():
 @users.route('/<uid>/edit', methods = ['GET','POST'])
 def edit_user(uid):
     user = User.query.filter_by(id=uid).first()
-    form = AddUser(obj=user)
+    form = EditUser(obj=user)
     if form.validate_on_submit():
         user.fromForm(form)
         db.session.commit()
