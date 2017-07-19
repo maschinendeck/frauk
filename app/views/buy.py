@@ -1,12 +1,13 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
 from ..model import User, Drink, Audit
 from .. import db
+import sqlalchemy
 
 buy = Blueprint('buy', __name__, url_prefix='/buy')
 
 @buy.route('/')
 def select_user():
-    users = User.query.all()
+    users = User.query.order_by(sqlalchemy.func.lower(User.username)).all()
     return render_template('user_selection.html', users=users)
 
 @buy.route('/<uid>')
