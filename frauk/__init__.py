@@ -5,7 +5,7 @@ from flask_bootstrap import Bootstrap
 
 # Define the WSGI application object
 frauk = Flask(__name__)
-Bootstrap(app)
+Bootstrap(frauk)
 
 # Configurations
 frauk.config.from_object('config')
