@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 from ..model import Audit, Drink, User
-from app import db
+from frauk import db
 import datetime
 
 stats = Blueprint('stats', __name__, url_prefix='/stats')

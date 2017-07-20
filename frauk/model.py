@@ -1,5 +1,5 @@
 import datetime
-from app import db
+from frauk import db
 import colors
 
 
