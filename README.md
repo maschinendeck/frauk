@@ -25,20 +25,34 @@ To install frauk and get it running the first time you can follow this section. 
 
 You need to have pip and some dependencies:
 
-  * flask  
-  * flask_bootstrap  
-  * flask_sqlalchemy  
-  * fnvhash  
-  * sqlite3  
+* flask  
+* flask_bootstrap  
+* flask_sqlalchemy  
+* fnvhash  
+* sqlite3  
 
 
     $ git clone https://github.com/Maschinendeck/frauk   
     $ cd frauk  
     $ pip install --editable .  
 
+Edit the frauk/config.py to set database path.
+
+Change into frauk directory and create the database:
+
+    $ python
+    > from app import db
+    > db.create_all()
+    > exit()
+
+After creating the db, if you want to import existing data from mete, just run:
+
+    $ python mete_import.py /path/to/mete.db
+
 Then to start the app in flask:
 
     $ export FLASK_APP=app  
     $ export FLASK_DEBUG=1  
     $ flask run  
+
 
