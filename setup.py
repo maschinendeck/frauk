@@ -10,6 +10,8 @@ setup(
         'flask',
         'flask_sqlalchemy==2.1',
         'flask_wtf',
-        'flask_bootstrap'
+        'flask_bootstrap',
+        'fnvhash',
+        'pillow'
     ]
 )
