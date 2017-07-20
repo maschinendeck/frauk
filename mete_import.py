@@ -11,8 +11,8 @@ and if the script does not explode, you should now have everything you need.
 import sqlite3
 import sys
 import datetime
-from app import db, colors
-from app.model import User, Drink, Audit
+from frauk import db, colors
+from frauk.model import User, Drink, Audit
 
 db.create_all()
 

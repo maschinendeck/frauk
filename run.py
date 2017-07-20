@@ -1,4 +1,4 @@
-from frauk import app
+from frauk import frauk
 
 if __name__ == '__main__':
-    app.run()
+    frauk.run()

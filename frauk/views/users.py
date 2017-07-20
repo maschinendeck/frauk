@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for
 from werkzeug.utils import secure_filename
 from ..model import User
 from ..forms import AddUser, EditUser
-from .. import app, db
+from .. import db
 import sqlalchemy
 
 #Users
