@@ -30,12 +30,13 @@ You need to have pip and some dependencies:
   * fnvhash
   * sqlite3
 
-    $ git clone https://github.com/Maschinendeck/frauk
-    $ cd frauk
-    $ pip install --editable .
+    $ git clone https://github.com/Maschinendeck/frauk   
+    $ cd frauk  
+    $ pip install --editable .  
 
 Then to start the app in flask:
-    $ export FLASK_APP=app
-    $ export FLASK_DEBUG=1
-    $ flask run
+
+    $ export FLASK_APP=app  
+    $ export FLASK_DEBUG=1  
+    $ flask run  
 
