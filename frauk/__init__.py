@@ -14,11 +14,11 @@ app.config.from_object('config')
 # by modules and controllers
 db = SQLAlchemy(app)
 
-from app.views.drinks import drinks
-from app.views.users import users
-from app.views.buy import buy
-from app.views.audits import audits
-from app.views.stats import stats
+from frauk.views.drinks import drinks
+from frauk.views.users import users
+from frauk.views.buy import buy
+from frauk.views.audits import audits
+from frauk.views.stats import stats
 
 app.register_blueprint(users)
 app.register_blueprint(drinks)

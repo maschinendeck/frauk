@@ -3,8 +3,8 @@ from wtforms import StringField, DecimalField, FloatField, IntegerField, \
     BooleanField, SubmitField
 from flask_wtf.file import FileField
 from wtforms.validators import DataRequired, Email, Optional, Regexp
-from app.validators import ImageValidator, UniqueValidator
-from app.model import User
+from frauk.validators import ImageValidator, UniqueValidator
+from frauk.model import User
 
 class AddDrink(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
