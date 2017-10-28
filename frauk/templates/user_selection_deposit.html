@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}Deposit some of your money for later use.{% endblock %}
+
+{% block content %}
+    
+{{ super() }}
+
+<div class="container">
+    <h1>Select User for deposit:</h1>
+    <ul class="list-group">
+    {% for user in users %}
+        <a class="avatar drink-img" href="{{ url_for('deposit.select_amount', uid=user.id) }}" style="background-color:{{ user.color }};color:white;" >
+           {{ user.username }}
+        </a>
+    {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
