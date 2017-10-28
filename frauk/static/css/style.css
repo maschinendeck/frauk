@@ -48,3 +48,9 @@
 .frauk-brand:hover {
     color: white;
 }
+.pagination {
+    position: relative;
+    top : 30px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
