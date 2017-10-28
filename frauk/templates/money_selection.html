@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}Deposit{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style>
+    .navbar-frauk{
+        background-color: {{ user.color }};
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    
+    <div class="container">
+        <h1>{{ user.username }}, your balance is {{ '{0:0.2f}'.format(user.balance) }} EUR;. Select a Drink to purchase:</h1>
+        
+        <ul>
+        {% for mony in money %}
+            <a
+                class="avatar drink-img"
+                href="{{ url_for('deposit.make_purchase', uid=user.id, mid=mony.id) }}"
+                style="background-color:{{ mony.color }};color:white;" >
+                {{ drink.name }} @ {{ '{0:0.2f} EUR'.format(mony.price) }}
+            </a>
+        {% endfor %}
+        </ul>
+
+    </div>
+
+{% endblock %}

@@ -19,9 +19,11 @@ from frauk.views.users import users
 from frauk.views.buy import buy
 from frauk.views.audits import audits
 from frauk.views.stats import stats
+from frauk.views.deposit import deposit
 
 frauk.register_blueprint(users)
 frauk.register_blueprint(drinks)
 frauk.register_blueprint(buy)
 frauk.register_blueprint(audits)
 frauk.register_blueprint(stats)
+frauk.register_blueprint(deposit)
