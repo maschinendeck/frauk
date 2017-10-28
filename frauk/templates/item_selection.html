@@ -17,12 +17,12 @@
         <h1>{{ user.username }}, your balance is {{ '{0:0.2f}'.format(user.balance) }} EUR;. Select a Drink to purchase:</h1>
         
         <ul>
-        {% for drink in drinks %}
+        {% for item in items %}
             <a
                 class="avatar drink-img"
-                href="{{ url_for('buy.make_purchase', uid=user.id, did=drink.id) }}"
-                style="background-color:{{ drink.color }};color:white;" >
-                {{ drink.name }} @ {{ '{0:0.2f} EUR'.format(drink.price) }}
+                href="{{ url_for('buy.make_purchase', uid=user.id, iid=item.id) }}"
+                style="background-color:{{ item.color }};color:white;" >
+                {{ item.name }} @ {{ '{0:0.2f} EUR'.format(item.price) }}
             </a>
         {% endfor %}
         </ul>
