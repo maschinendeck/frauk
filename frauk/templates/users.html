@@ -29,7 +29,7 @@
                 <td> 
                     {% if user.audit %}
                         <a class="btn btn-default btn-sm" 
-                            href="{{ url_for("audits.get_audits", uid=user.id) }}">
+                            href="{{ url_for("audits.get_audits", user=user.id) }}">
                             <i class="glyphicon glyphicon-eye-open"></i> Audit
                         </a>
                     {% else %}
