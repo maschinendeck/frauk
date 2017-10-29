@@ -26,7 +26,7 @@
                 </td>
                 <td> {{ drink.bottle_size_l }} </td>
                 <td> {{ drink.caffeine_mg }} </td>
-                <td> {{ '{0:0.2f}'.format(drink.price) }} </td>
+                <td> {{ '{0:0.2f}'.format(drink.price / 100.0) }} </td>
                 <td>
                     <a class="btn btn-default btn-sm" 
                         href="{{ url_for("drinks.edit_drink", did=drink.id) }}">

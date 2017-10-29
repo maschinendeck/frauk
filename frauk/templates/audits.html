@@ -16,7 +16,7 @@
             {% for audit in query.items %}
             <tr>
                 <td> {{ audit.created_at.strftime("%d.%m.%y - %H:%M") }} </td>
-                <td> {{ '{0:0.2f}'.format(audit.difference) }} </td>
+                <td> {{ '{0:0.2f}'.format(audit.difference / 100.0) }} </td>
                 <td>
                     <span 
                         style="color:{{ audit.drink.color }};"

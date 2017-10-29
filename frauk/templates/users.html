@@ -25,7 +25,7 @@
                     {{ user.username }}
                 </td>
                 <td> {{ user.email }} </td>
-                <td> {{ '{0:0.2f}'.format(user.balance) }} </td>
+                <td> {{ '{0:0.2f}'.format(user.balance / 100.0) }} </td>
                 <td> 
                     {% if user.audit %}
                         <a class="btn btn-default btn-sm" 

@@ -6,7 +6,7 @@ import colors
 class Audit(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
-    difference = db.Column(db.Numeric, default=0)
+    difference = db.Column(db.Integer, default=0)
     drink_id = db.Column(db.ForeignKey('item.id'), nullable=False)
     user_id = db.Column(db.ForeignKey('user.id'), nullable=False)
 
@@ -25,7 +25,7 @@ class Item(db.Model):
     __table_args__ = { 'extend_existing' : True }
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250))
-    price = db.Column(db.Numeric)
+    price = db.Column(db.Integer)
     color = db.Column(db.String(7), default='#56bf8b')
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
@@ -40,7 +40,7 @@ class Item(db.Model):
         if self.name != form.name.data:
             self.name = form.name.data
             self.color = colors.from_name(form.name.data)
-        self.price = form.price.data
+        self.price = int(form.price.data * 100)
         self.updated_at = datetime.datetime.now()
 
 class Money(Item):
@@ -64,7 +64,7 @@ class User(db.Model):
     email = db.Column(db.String(250))
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
-    balance = db.Column(db.Numeric, default=0)
+    balance = db.Column(db.Integer, default=0)
     active = db.Column(db.Boolean, default=True)
     audit = db.Column(db.Boolean, default=True)
     color = db.Column(db.String(7), default='#56bf8b')
@@ -74,6 +74,6 @@ class User(db.Model):
             self.username = form.username.data
             self.color = colors.from_name(form.username.data)
         self.email = form.email.data
-        self.balance = form.balance.data
+        self.balance = int(form.balance.data * 100)
         self.audit = form.audit.data
         self.updated_at = datetime.datetime.now()

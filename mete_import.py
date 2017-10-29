@@ -40,7 +40,7 @@ for row in rows:
     user.email = row[2]
     user.created_at = datetime.datetime.strptime(row[3], "%Y-%m-%d %H:%M:%S.%f")
     user.updated_at = datetime.datetime.strptime(row[4], "%Y-%m-%d %H:%M:%S.%f")
-    user.balance = row[5]
+    user.balance = int(row[5] * 100)
     user.active = row[6]
     user.audit = (row[7] == 't')
     user.color = colors.from_name(row[1])
@@ -67,7 +67,7 @@ for row in rows:
     drink.name = row[1]
     drink.bottle_size_l = row[2]
     drink.caffeine_mg = row[3]
-    drink.price = row[4]
+    drink.price = int(row[4] * 100)
     drink.color = colors.from_name(row[1])
     drink.created_at = datetime.datetime.strptime(row[6], "%Y-%m-%d %H:%M:%S.%f")
     drink.updated_at = datetime.datetime.strptime(row[7], "%Y-%m-%d %H:%M:%S.%f")
@@ -83,7 +83,7 @@ rows = res.fetchall()
 for row in rows:
     uid = row[4]
     if not uid: uid = 0
-    audit = Audit(row[2], row[3], uid)
+    audit = Audit(int(row[2] * 100), row[3], uid)
     audit.id = row[0]
     audit.created_at = datetime.datetime.strptime(row[1], "%Y-%m-%d %H:%M:%S.%f")
     db.session.add(audit)
