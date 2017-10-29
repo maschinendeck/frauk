@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
 from ..model import User, Money, Audit
 from .. import db
+from decimal import Decimal
 import sqlalchemy
 
 deposit = Blueprint('deposit', __name__, url_prefix='/deposit')
@@ -13,20 +14,22 @@ def select_user():
 @deposit.route('/<uid>')
 def select_amount(uid):
     user = User.query.get(uid)
-    money = Money.query.all()
+    money = [
+        { 'name' : '5 Euro', 'amount' : 5.0 },
+        { 'name' : '10 Euro', 'amount' : 10.0 },
+    ]
     return render_template('money_selection.html', user=user, money=money)
 
-@deposit.route('/<uid>/<mid>')
-def make_deposit(uid, mid):
+@deposit.route('/<int:uid>/<float:amount>')
+def make_deposit(uid, amount):
     user = User.query.get(uid)
-    money = Money.query.get(mid)
-    if user and money:
-        user.balance = user.balance + money.price
+    if user and amount:
+        user.balance = user.balance + Decimal(amount)
         userid = 0
         if user.audit:
             userid = user.id
-        audit = Audit(-1 * money.price, money.id, userid)
+        audit = Audit(Decimal(amount), 0, userid)
         db.session.add(audit)
         db.session.commit()
-    flash(u'You have deposited {}. New balance: {}'.format(money.price, user.balance), 'success')
-    return redirect(url_for('buy.select_user'))
+    flash(u'Thank you, {}. Your new balance is {}'.format(user.username, user.balance), 'success')
+    return redirect(url_for('deposit.select_user'))

@@ -17,12 +17,12 @@
         <h1>{{ user.username }}, your balance is {{ '{0:0.2f}'.format(user.balance) }} EUR;. Select an amount of money to deposit:</h1>
         
         <ul>
-        {% for mony in money %}
+        {% for money in money %}
             <a
                 class="avatar drink-img"
-                href="{{ url_for('deposit.make_purchase', uid=user.id, mid=mony.id) }}"
-                style="background-color:{{ mony.color }};color:white;" >
-                {{ drink.name }} @ {{ '{0:0.2f} EUR'.format(mony.price) }}
+                href="{{ url_for('deposit.make_deposit', uid=user.id, amount=money.amount) }}"
+                style="background-color:cyan;color:white;" >
+                {{ money.name }}
             </a>
         {% endfor %}
         </ul>
