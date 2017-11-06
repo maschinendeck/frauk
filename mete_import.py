@@ -11,8 +11,10 @@ and if the script does not explode, you should now have everything you need.
 import sqlite3
 import sys
 import datetime
-from frauk import db, colors
-from frauk.model import User, Drink, Audit
+from frauk import db
+from frauk.users.model import User
+from frauk.products.model import Product
+from frauk.audits.model import Audit
 
 db.create_all()
 
@@ -36,14 +38,13 @@ rows = res.fetchall()
 for row in rows:
     user = User()
     user.id = row[0]
-    user.username = row[1]
+    user.name = row[1]
     user.email = row[2]
     user.created_at = datetime.datetime.strptime(row[3], "%Y-%m-%d %H:%M:%S.%f")
     user.updated_at = datetime.datetime.strptime(row[4], "%Y-%m-%d %H:%M:%S.%f")
     user.balance = int(row[5] * 100)
     user.active = row[6]
     user.audit = (row[7] == 't')
-    user.color = colors.from_name(row[1])
     db.session.add(user)
 db.session.commit()
 
@@ -62,16 +63,15 @@ res = cur.execute('''SELECT
 rows = res.fetchall()
 
 for row in rows:
-    drink = Drink()
-    drink.id = row[0]
-    drink.name = row[1]
-    drink.bottle_size_l = row[2]
-    drink.caffeine_mg = row[3]
-    drink.price = int(row[4] * 100)
-    drink.color = colors.from_name(row[1])
-    drink.created_at = datetime.datetime.strptime(row[6], "%Y-%m-%d %H:%M:%S.%f")
-    drink.updated_at = datetime.datetime.strptime(row[7], "%Y-%m-%d %H:%M:%S.%f")
-    db.session.add(drink)
+    product = Product()
+    product.id = row[0]
+    product.name = row[1]
+    product.bottle_size_l = row[2]
+    product.caffeine_mg = row[3]
+    product.price = int(row[4] * 100)
+    product.created_at = datetime.datetime.strptime(row[6], "%Y-%m-%d %H:%M:%S.%f")
+    product.updated_at = datetime.datetime.strptime(row[7], "%Y-%m-%d %H:%M:%S.%f")
+    db.session.add(product)
 db.session.commit()
 
 res = cur.execute('''
@@ -81,11 +81,14 @@ res = cur.execute('''
 rows = res.fetchall()
 
 for row in rows:
+    audit = Audit()
     uid = row[4]
     if not uid: uid = 0
-    audit = Audit(int(row[2] * 100), row[3], uid)
     audit.id = row[0]
     audit.created_at = datetime.datetime.strptime(row[1], "%Y-%m-%d %H:%M:%S.%f")
+    audit.difference = row[2] * 100
+    audit.product_id = row[3]
+    audit.user_id = uid
     db.session.add(audit)
 
 
