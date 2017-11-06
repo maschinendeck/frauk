@@ -1,29 +1,23 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_bootstrap import Bootstrap
+from flask_marshmallow import Marshmallow
+from flask_restful import Api
 
-
-# Define the WSGI application object
 frauk = Flask(__name__)
-Bootstrap(frauk)
-
-# Configurations
+db = SQLAlchemy(frauk)
+ma = Marshmallow(frauk)
 frauk.config.from_object('config')
 
-# Define the database object which is imported
-# by modules and controllers
-db = SQLAlchemy(frauk)
+from frauk.users.api import UserAPI, UsersAPI
+from frauk.products.api import ProductAPI, ProductsAPI
+from frauk.audits.api import AuditsAPI
 
-from frauk.views.drinks import drinks
-from frauk.views.users import users
-from frauk.views.buy import buy
-from frauk.views.audits import audits
-from frauk.views.stats import stats
-from frauk.views.deposit import deposit
+api = Api(frauk)
 
-frauk.register_blueprint(users)
-frauk.register_blueprint(drinks)
-frauk.register_blueprint(buy)
-frauk.register_blueprint(audits)
-frauk.register_blueprint(stats)
-frauk.register_blueprint(deposit)
+api.add_resource(UserAPI, '/users/<int:id>.json', endpoint = 'user')
+api.add_resource(UsersAPI, '/users.json', endpoint = 'users')
+
+api.add_resource(ProductAPI, '/products/<int:id>.json', endpoint = 'product')
+api.add_resource(ProductsAPI, '/products.json', endpoint = 'products')
+
+api.add_resource(AuditsAPI, '/audits.json', endpoint = 'audits')
