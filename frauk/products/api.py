@@ -5,7 +5,7 @@ from .model import Product, ProductSchema
 from sqlalchemy import update
 
 productSchema = ProductSchema()
-produchtsSchema = ProductSchema(many=True)
+productsSchema = ProductSchema(many=True)
 
 class ProductAPI(Resource):
 
@@ -42,10 +42,10 @@ class ProductsAPI(Resource):
         return productsSchema.dump(products).data
 
     def post(self):
-        product = productSchema.load(request.get_json())
+        product = productsSchema.load(request.get_json())
         if product.errors:
             return product.errors
         else:
             db.session.add(product.data)
             db.session.commit()
-            return productSchema.dump(product.data)
+            return productsSchema.dump(product.data)

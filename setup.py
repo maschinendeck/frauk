@@ -11,6 +11,9 @@ setup(
         'flask_sqlalchemy==2.1',
         'flask_wtf',
         'flask_bootstrap',
+        'flask_marshmallow',
+        'marshmallow-sqlalchemy',
+        'flask_restful',
         'fnvhash',
         'pillow'
     ]
