@@ -5,7 +5,7 @@ from .model import Product, ProductSchema
 from sqlalchemy import update
 
 productSchema = ProductSchema()
-produchtsSchema = ProductSchema(many=True)
+productsSchema = ProductSchema(many=True)
 
 class ProductAPI(Resource):
 
