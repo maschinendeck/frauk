@@ -3,12 +3,38 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_restful import Api
 from flask_cors import CORS
+from sqlalchemy.ext.declarative import declarative_base
 
 frauk = Flask(__name__)
 cors = CORS(frauk, resources={r"/*": {"origins": "*"}})
 db = SQLAlchemy(frauk)
+Base = declarative_base()
+Base.query = db.session.query_property()
+
 ma = Marshmallow(frauk)
 frauk.config.from_object('config')
+
+
+
+from flask_graphql import GraphQLView
+from frauk.schema import schema
+
+
+frauk.add_url_rule(
+    '/graphql',
+    view_func=GraphQLView.as_view(
+        'graphql',
+        schema=schema,
+        graphiql=True # for having the GraphiQL interface
+    )
+)
+
+@frauk.teardown_appcontext
+def shutdown_session(exception=None):
+    db.session.remove()
+
+"""
+
 
 from frauk.users.api import UserAPI, UsersAPI, UserPaymentAPI, UserTradeAPI
 from frauk.products.api import ProductAPI, ProductsAPI
@@ -28,5 +54,4 @@ api.add_resource(ProductsAPI, '/products.json', endpoint = 'products')
 api.add_resource(AuditsAPI, '/audits.json', endpoint = 'audits')
         
         
-        
-        
+"""
