@@ -15,16 +15,16 @@ ma = Marshmallow(frauk)
 frauk.config.from_object('config')
 
 
-
+import graphene
 from flask_graphql import GraphQLView
-from frauk.schema import schema
-
+from .mutation import Mutation
+from .query import Query
 
 frauk.add_url_rule(
     '/graphql',
     view_func=GraphQLView.as_view(
         'graphql',
-        schema=schema,
+        schema=graphene.Schema(query=Query, mutation=Mutation),
         graphiql=True # for having the GraphiQL interface
     )
 )
@@ -32,26 +32,3 @@ frauk.add_url_rule(
 @frauk.teardown_appcontext
 def shutdown_session(exception=None):
     db.session.remove()
-
-"""
-
-
-from frauk.users.api import UserAPI, UsersAPI, UserPaymentAPI, UserTradeAPI
-from frauk.products.api import ProductAPI, ProductsAPI
-from frauk.audits.api import AuditsAPI
-
-api = Api(frauk)
-
-api.add_resource(UserAPI, '/users/<int:id>.json', endpoint = 'user')
-api.add_resource(UsersAPI, '/users.json', endpoint = 'users')
-api.add_resource(UserPaymentAPI, '/users/<int:id>/deposit.json', endpoint = 'user.deposit')
-api.add_resource(UserPaymentAPI, '/users/<int:id>/pay.json', endpoint = 'user.pay')
-api.add_resource(UserTradeAPI, '/users/<int:id>/product.json', endpoint = 'user.product')
-
-api.add_resource(ProductAPI, '/products/<int:id>.json', endpoint = 'product')
-api.add_resource(ProductsAPI, '/products.json', endpoint = 'products')
-
-api.add_resource(AuditsAPI, '/audits.json', endpoint = 'audits')
-        
-        
-"""
