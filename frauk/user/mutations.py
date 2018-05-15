@@ -42,10 +42,10 @@ class ModifyUser(graphene.Mutation):
                 db.session.add(user)
                 db.session.commit()
                 ok = True
-                return ModifyUser(user=user , ok=ok)
+                return ModifyUser(user=user, ok=ok)
             else:
                 ok = False
-                return CreateUser(user=user , ok=ok)
+                return ModifyUser(user=user, ok=ok)
 
 class CreateUserInput(graphene.InputObjectType):
     name = graphene.String(required=True)
@@ -72,6 +72,6 @@ class CreateUser(graphene.Mutation):
             db.session.add(user)
             db.session.commit()
             ok = True
-            return CreateUser(user=user , ok=ok)
+            return CreateUser(user=user, ok=ok)
         else:
             return CreateUser(user=None, ok=False)
