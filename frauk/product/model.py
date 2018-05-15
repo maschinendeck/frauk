@@ -1,8 +1,8 @@
 import datetime
-from frauk import db, ma
-from marshmallow import fields
+from frauk import db, Base
 
-class Product(db.Model):
+class Product(Base):
+    __tablename__ = 'product'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250), unique=True)
     price = db.Column(db.Integer, default=0)
@@ -11,8 +11,3 @@ class Product(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
     active = db.Column(db.Boolean, default=True)
-
-class ProductSchema(ma.ModelSchema):
-    class Meta:
-        model = Product
-    name = fields.String(required=True)
