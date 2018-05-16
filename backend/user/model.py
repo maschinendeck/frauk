@@ -1,5 +1,5 @@
 import datetime
-from frauk import db, Base
+from backend import db, Base
 
 class User(Base):
     __tablename__ = 'user'

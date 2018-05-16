@@ -11,14 +11,13 @@ and if the script does not explode, you should now have everything you need.
 import sqlite3
 import sys
 import datetime
-from frauk import db
-from frauk.users.model import User
-from frauk.products.model import Product
-from frauk.audits.model import Audit
+from backend import db
+from backend.user.model import User
+from backend.product.model import Product
+from backend.audit.model import Audit
 
 db.create_all()
 
-#con = sqlite3.connect('/home/vann/projects/frauk/mete/mete.db')
 con = sqlite3.connect(sys.argv[1])
 
 cur = con.cursor()

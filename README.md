@@ -1,13 +1,16 @@
 ## frauk
 ### matekasse & more
 
-[Mete](https://github.com/chaosdorf/mete) Clone based on Python and Flask.
+A payment solution for our Hackspace inspired by
+[Mete](https://github.com/chaosdorf/mete).
+It's based on Python, Flask and GraphQL(graphene).
+The WebApp will be based on ReactJS.
 
 #### Import from [Mete](https://github.com/chaosdorf/mete)
 
 The import only works if no frauk db exists.
 
-    $ mv app/dev.db app/dev.db_bak
+    $ mv backend/dev.db backend/dev.db_bak
     $ python mete_import.py /path/to/mete_database.db
 
 That's it.
@@ -19,4 +22,3 @@ That's it.
 * User Auth über NFC Karten
 * Getränkebestandsanzeige, Statistiken
 * Gamification (Archivements oder so?)
-
