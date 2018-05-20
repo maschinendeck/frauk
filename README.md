@@ -1,5 +1,5 @@
-## frauk
-### matekasse & more
+![frauk](./logo.png)
+## matekasse & more
 
 A payment solution for our Hackspace inspired by
 [Mete](https://github.com/chaosdorf/mete).
