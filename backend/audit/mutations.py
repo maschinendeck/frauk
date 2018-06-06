@@ -1,10 +1,10 @@
 import graphene
 import datetime
-from frauk import db
+from backend import db
 from .model import Audit
 from .schema import AuditSchema
-from frauk.product.model import Product
-from frauk.user.model import User
+from ..product.model import Product
+from ..user.model import User
 
 class AuditProductInput(graphene.InputObjectType):
     product_id = graphene.Int(required=True)

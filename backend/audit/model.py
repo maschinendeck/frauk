@@ -1,7 +1,7 @@
 import datetime
-from frauk import db, Base
-from frauk.product.model import Product
-from frauk.user.model import User
+from backend import db, Base
+from ..product.model import Product
+from ..user.model import User
 from sqlalchemy.orm import (relationship, backref)
 
 class Audit(Base):

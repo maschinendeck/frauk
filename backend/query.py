@@ -1,8 +1,8 @@
 import graphene
 from graphene_sqlalchemy import SQLAlchemyConnectionField
-from frauk.audit.schema import AuditSchema
-from frauk.user.schema import UserSchema
-from frauk.product.schema import ProductSchema
+from .audit.schema import AuditSchema
+from .user.schema import UserSchema
+from .product.schema import ProductSchema
 
 class Query(graphene.ObjectType):
     node = graphene.relay.Node.Field()

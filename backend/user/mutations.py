@@ -1,6 +1,6 @@
 import graphene
 import datetime
-from frauk import db
+from backend import db
 from .model import User
 from .schema import UserSchema
 

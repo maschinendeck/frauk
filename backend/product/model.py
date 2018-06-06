@@ -1,5 +1,5 @@
 import datetime
-from frauk import db, Base
+from backend import db, Base
 
 class Product(Base):
     __tablename__ = 'product'
