@@ -1,13 +1,14 @@
-## frauk
+![frauk](./logo.svg)
 ### matekasse & more
 
-[Mete](https://github.com/chaosdorf/mete) Clone based on Python and Flask.
+Payment solution for our Space inspired by
+[Mete](https://github.com/chaosdorf/mete).
 
 #### Import from [Mete](https://github.com/chaosdorf/mete)
 
 The import only works if no frauk db exists.
 
-    $ mv app/dev.db app/dev.db_bak
+    $ mv frauk/dev.db frauk/dev.db_bak
     $ python mete_import.py /path/to/mete_database.db
 
 That's it.
